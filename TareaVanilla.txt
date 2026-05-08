@@ -1,0 +1,121 @@
+¿Qué te pedimos que hagas?
+Partiendo de la última versión de tu aplicación (JavaFX + MySQL), deberás implementar dos nuevas funcionalidades accesibles desde la interfaz gráfica:
+
+1. Gestión de XML mediante DOM
+
+Creación de paquetes
+Debes crear los siguientes paquetes:
+
+ biblioteca.fichero
+biblioteca.utilidades
+ 
+
+Clase UtilidadesXML
+
+En el paquete utilidades, crea la clase: UtilidadesXML
+
+Esta clase será la encargada de trabajar con documentos XML mediante DOM.
+
+Métodos obligatorios:
+
+Document xmlToDom(String ruta): Convierte un fichero XML en un árbol DOM.
+void domToXml(Document dom, String ruta): Convierte un árbol DOM en un fichero XML.
+Document crearDomVacio(String etiquetaRaiz): Crea un documento DOM vacío con la etiqueta raíz indicada.
+- Copia de seguridad (exportación a XML): 
+
+Se añadirá en la interfaz gráfica la opción:  “Hacer copia de seguridad”
+
+Esta opción deberá:
+
+Obtener los datos desde la base de datos (modelo actual).
+Convertirlos a estructuras DOM.
+Generar los siguientes ficheros XML:
+usuarios.xml
+libros.xml
+autores.xml
+prestamos.xml
+ 
+- Restauración (importación desde XML)
+
+Se añadirá la opción: “Cargar copia de seguridad”
+
+Esta opción deberá:
+
+Leer los ficheros XML.
+Convertirlos a objetos del dominio.
+Eliminar los datos actuales de la base de datos.
+Insertar los nuevos datos desde los XML.
+ Adaptación de clases de negocio:
+
+Para cada clase que gestione colecciones (Usuarios, Libros, Autores, Prestamos), deberás añadir funcionalidad XML.
+
+
+Ejemplo adaptado para (Usuarios)
+
+Para la clase Usuarios:
+
+Atributos:
+Atributo instancia (Singleton)
+Métodos obligatorios:
+getInstancia()
+comenzar(): Llama a leerXML()
+terminar(): Llama a escribirXML()
+Usuario elementToUsuario(Element elemento): Convierte un nodo XML en un objeto Usuario
+void leerXML(): Lee el XML e inserta los usuarios en la colección
+Element usuarioToElement(Document dom, Usuario usuario): Convierte un Usuario en nodo XML
+void escribirXML(): Escribe todos los usuarios en el XML
+
+Esto mismo se aplicará a:
+- Libros
+- Autores
+- Prestamos
+
+Estructura de ficheros XML
+- Usuarios.xml
+
+usuarios.xml
+
+- Autores.xml
+
+Autores.xml
+
+- Libros.xml
+
+Libros.xml
+
+- Prestamos.xml
+
+Prestamos.xml
+
+- Consideraciones importantes
+
+Se debe usar obligatoriamente DOM.
+No se permite usar librerías externas (Jackson, Gson, etc.).
+Se debe validar:
+XML bien formado
+Datos correctos
+Respetar el orden de carga:
+Autores
+Libros
+Usuarios
+Préstamos
+Interfaz Gráfica
+Añadir al menú:
+
+ Archivo:
+Hacer copia de seguridad
+Cargar copia de seguridad
+ Usar:
+
+FileChooser
+Alert (confirmación)
+Mensajes de éxito/error
+Se valorará
+Uso correcto de DOM
+Estructura XML bien definida
+Correcta conversión objeto ↔ XML
+Integración con base de datos
+Uso del patrón Singleton
+Separación de responsabilidades
+Interfaz gráfica funcional
+Control de errores

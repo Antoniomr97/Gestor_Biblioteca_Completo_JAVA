@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<usuarios>
+    <usuario>
+        <dni>MB123</dni>
+        <nombre>Javier Saldaña</nombre>
+        <email>saldana@saldana.com</email>
+        <direccion>
+            <via>Calle Alo</via>
+            <numero>13</numero>
+            <cp>78945</cp>
+            <localidad>Peru</localidad>
+        </direccion>
+    </usuario>
+    <usuario>
+        <dni>AB124</dni>
+        <nombre>Maria Medina</nombre>
+        <email>maria@maria.com</email>
+        <direccion>
+            <via>Calle Alpaca </via>
+            <numero>32</numero>
+            <cp>04005</cp>
+            <localidad>Almería</localidad>
+        </direccion>
+    </usuario>
+</usuarios>

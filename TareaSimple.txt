@@ -1,0 +1,67 @@
+========================================
+  TAREA 08 - EXPLICACIÓN PARA NIÑOS 😊
+========================================
+
+Imagina que tienes una biblioteca con muchos libros, personas y préstamos
+guardados en una base de datos (como una agenda gigante en el ordenador).
+
+LA TAREA ES HACER DOS COSAS NUEVAS:
+
+---------------------------------------
+1. 💾 HACER COPIA DE SEGURIDAD (Guardar)
+---------------------------------------
+Es como hacer una FOTO de todos tus datos para no perderlos.
+
+Cuando hagas clic en "Hacer copia de seguridad":
+  → El programa coge todos los datos de la base de datos
+  → Los transforma en 4 archivos de texto especiales (llamados XML):
+       - autores.xml   (todos los autores de los libros)
+       - libros.xml    (todos los libros)
+       - usuarios.xml  (todas las personas registradas)
+       - prestamos.xml (todos los préstamos realizados)
+  → Guarda esos archivos en la carpeta que tú elijas
+
+Así, si mañana se rompe la base de datos, tienes los datos guardados en esos ficheros.
+
+---------------------------------------
+2. 📂 CARGAR COPIA DE SEGURIDAD (Restaurar)
+---------------------------------------
+Es como recuperar la FOTO que hiciste antes.
+
+Cuando hagas clic en "Cargar copia de seguridad":
+  → El programa lee esos 4 archivos XML que habías guardado
+  → BORRA todos los datos actuales de la base de datos
+  → Mete los datos de los ficheros XML de vuelta en la base de datos
+  → El orden es IMPORTANTE: primero autores, luego libros, luego usuarios, y por último préstamos
+
+---------------------------------------
+3. 🛠️ ¿QUÉ CAMBIA EN EL CÓDIGO?
+---------------------------------------
+Para conseguir esto, hay que crear o modificar varias piezas del programa:
+
+  [NUEVO] UtilidadesXML.java → Es la "caja de herramientas" para leer y escribir XML
+  [NUEVO] Autores.java       → Gestiona a los autores con sus propias opciones de guardado
+  [MODIFICADO] Libros.java   → Aprende a guardarse y leerse en XML
+  [MODIFICADO] Usuarios.java → Aprende a guardarse y leerse en XML
+  [MODIFICADO] Prestamos.java→ Aprende a guardarse y leerse en XML
+  [MODIFICADO] Modelo.java   → El jefe que coordina todo
+
+  [MODIFICADO] La ventana del programa → Tendrá un menú "Archivo" con
+               las dos nuevas opciones (como en Word o cualquier programa)
+
+---------------------------------------
+4. 📋 REGLAS IMPORTANTES
+---------------------------------------
+  ✅ Usar solo XML puro (técnica llamada DOM), nada de librerías externas
+  ✅ Los XML deben estar bien escritos (bien formados)
+  ✅ Siempre cargar en orden: Autores → Libros → Usuarios → Préstamos
+  ✅ Pedir confirmación antes de borrar los datos actuales
+  ✅ Mostrar mensajes de éxito o error al usuario
+
+========================================
+  ¡RESUMIENDO EN UNA FRASE! 🎯
+========================================
+Hacer que el programa de la biblioteca pueda guardar todos sus datos
+en ficheros XML (como exportar), y luego recuperarlos desde esos ficheros
+(como importar), todo accesible desde un menú "Archivo" en la pantalla.
+========================================

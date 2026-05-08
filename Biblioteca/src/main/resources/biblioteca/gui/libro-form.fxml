@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefWidth="480.0" spacing="14.0" stylesheets="@styles.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.vista.gui.LibroFormController">
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </padding>
+    <children>
+
+        <!-- ===== TÍTULO ===== -->
+        <Label text="Añadir Nuevo Libro" textFill="#2c3e50">
+            <font><Font name="System Bold" size="18.0" /></font>
+        </Label>
+
+        <!-- ===== SECCIÓN: DATOS DEL LIBRO ===== -->
+        <Label text="Datos del Libro" textFill="#5D9CEC">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Label>
+        <GridPane hgap="15.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="32.0" />
+                <RowConstraints minHeight="32.0" />
+                <RowConstraints minHeight="32.0" />
+                <RowConstraints minHeight="32.0" />
+            </rowConstraints>
+            <children>
+                <Label text="ISBN (13 díg.):" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="txtIsbn" promptText="9780000000000"
+                           GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <Label text="Título:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <TextField fx:id="txtTitulo" promptText="Título del libro"
+                           GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <Label text="Año:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <TextField fx:id="txtAnio" promptText="YYYY"
+                           GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                <Label text="Categoría:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <ComboBox fx:id="comboCat" maxWidth="1.7976931348623157E308"
+                          promptText="Seleccionar..."
+                          GridPane.rowIndex="3" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+        <Separator />
+
+        <!-- ===== SECCIÓN: AUTORES (permite añadir varios) ===== -->
+        <Label text="Autores del Libro" textFill="#5D9CEC">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Label>
+        <GridPane hgap="15.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="32.0" />
+                <RowConstraints minHeight="32.0" />
+                <RowConstraints minHeight="32.0" />
+            </rowConstraints>
+            <children>
+                <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="txtAutorNombre" promptText="Nombre del autor"
+                           GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <Label text="Apellidos:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <TextField fx:id="txtAutorApellidos" promptText="Apellidos del autor"
+                           GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <Label text="Nacionalidad:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <TextField fx:id="txtAutorNacionalidad" promptText="Ej: Española, Francesa..."
+                           GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+        <!-- Botón para añadir autor a la lista + La lista de autores añadidos -->
+        <HBox alignment="CENTER_RIGHT" spacing="8.0">
+            <children>
+                <Button fx:id="btnAddAutor" mnemonicParsing="false" text="+ Añadir Autor" onAction="#handleAddAutor" />
+            </children>
+        </HBox>
+        <Label text="Autores añadidos:" />
+        <!-- ListView para mostrar los autores añadidos. Tamaño pequeño ya que es una lista auxiliar. -->
+        <ListView fx:id="listAutores" prefHeight="80.0" />
+
+        <Separator />
+
+        <!-- ===== SECCIÓN: AUDIOLIBRO ===== -->
+        <CheckBox fx:id="chkAudiolibro" text="¿Es un Audiolibro?" onAction="#toggleAudiolibro" />
+
+        <!-- Panel oculto por defecto; se muestra al marcar el CheckBox -->
+        <VBox fx:id="panelAudiolibro" spacing="10.0" visible="false" managed="false">
+            <Label text="Datos del Audiolibro" textFill="#5D9CEC">
+                <font><Font name="System Bold" size="13.0" /></font>
+            </Label>
+            <GridPane hgap="15.0" vgap="10.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="32.0" />
+                    <RowConstraints minHeight="32.0" />
+                </rowConstraints>
+                <children>
+                    <Label text="Duración (horas):" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                    <TextField fx:id="txtDuracion" promptText="Ej: 8"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                    <Label text="Formato:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                    <TextField fx:id="txtFormato" promptText="Ej: MP3, AAC, OGG..."
+                               GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                </children>
+            </GridPane>
+        </VBox>
+
+        <!-- ===== BOTONES GUARDAR / CANCELAR ===== -->
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <children>
+                <Button fx:id="btnCancelar" mnemonicParsing="false" text="Cancelar" onAction="#handleCancelar" />
+                <Button fx:id="btnGuardar" mnemonicParsing="false" styleClass="button-primary" text="Guardar" onAction="#handleGuardar" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libros>
+    <libro>
+        <isbn>1111111111111</isbn>
+        <titulo>Los cuentos de Paquito</titulo>
+        <anio>2008</anio>
+        <categoria>Infantil</categoria>
+        <tipo>audiolibro</tipo>
+        <duracion>28800</duracion>
+        <formato>MP3</formato>
+        <autores>
+            <autor>
+                <nombre>Paquito</nombre>
+                <apellidos>Salas</apellidos>
+                <nacionalidad>Española</nacionalidad>
+            </autor>
+        </autores>
+    </libro>
+    <libro>
+        <isbn>1231231231231</isbn>
+        <titulo>La sombra del viento</titulo>
+        <anio>2001</anio>
+        <categoria>Novela</categoria>
+        <tipo>normal</tipo>
+        <autores>
+            <autor>
+                <nombre>Carlos Ruiz Zafon</nombre>
+                <apellidos>Ruiz Zafon</apellidos>
+                <nacionalidad>España</nacionalidad>
+            </autor>
+        </autores>
+    </libro>
+    <libro>
+        <isbn>4561237894561</isbn>
+        <titulo>The Witcher La Espada del Destino</titulo>
+        <anio>2010</anio>
+        <categoria>Otros</categoria>
+        <tipo>normal</tipo>
+        <autores>
+            <autor>
+                <nombre>Andrzej</nombre>
+                <apellidos>Sapkowski</apellidos>
+                <nacionalidad>Polaca</nacionalidad>
+            </autor>
+        </autores>
+    </libro>
+    <libro>
+        <isbn>4561237894562</isbn>
+        <titulo>The Witcher la Sangre de los Elfos</titulo>
+        <anio>1999</anio>
+        <categoria>Otros</categoria>
+        <tipo>normal</tipo>
+        <autores>
+            <autor>
+                <nombre>Paco</nombre>
+                <apellidos>El Chanclas</apellidos>
+                <nacionalidad>Peruano</nacionalidad>
+            </autor>
+            <autor>
+                <nombre>Adrian</nombre>
+                <apellidos>Merluza</apellidos>
+                <nacionalidad>Peruano</nacionalidad>
+            </autor>
+        </autores>
+    </libro>
+    <libro>
+        <isbn>4564564564561</isbn>
+        <titulo>Anaconda el Audiolibro</titulo>
+        <anio>2005</anio>
+        <categoria>Infantil</categoria>
+        <tipo>audiolibro</tipo>
+        <duracion>28800</duracion>
+        <formato>MP3</formato>
+        <autores>
+            <autor>
+                <nombre>Juanito</nombre>
+                <apellidos>El Atunes</apellidos>
+                <nacionalidad>Venezolano</nacionalidad>
+            </autor>
+        </autores>
+    </libro>
+</libros>

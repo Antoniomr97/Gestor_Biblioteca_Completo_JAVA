@@ -1,0 +1,16 @@
+
+
+Muy buenas Fernando, he tenido que investigar bastante, ya que no comprendía bien lo que pedía el enunciado.
+Al entender que era más simple de lo que pensaba que solo era crear una copia de seguridad y cargarla ya he podido hacerla lo mejor que he sabido.
+Lo unico que he tenido un fallo que hacia bien la copia pero no la cargaba bien, lo he corregido con un uppercase en el enum. Para que 
+cuando reciba algo sea exactamente como el enum porque si no me daba fallo.
+
+A parte de eso ha sido a prueba y error y estoy bastante contento con el resultado, he intentado seguir las instrucciones del enunciado al pie de la letra.
+También he intentado que el código sea lo más limpio y ordenado posible.
+
+Aún así he estado mirando ejemplos y hay cosas que podría hacer mejor, pero he hecho lo mejor que he sabido.  
+
+También he aplicado los cambios que me dijiste en la tarea anterior, desglosando la
+clase God y creando un sistema más asequible.
+
+Un saludo Fernando que te vaya muy bien nos vemos pronto. :)

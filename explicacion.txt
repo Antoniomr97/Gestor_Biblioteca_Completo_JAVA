@@ -1,0 +1,239 @@
+===========================================================================
+    EXPLICACIÓN COMPLETA DEL PROGRAMA - BIBLIOTECA JAVAFX + MySQL + XML
+===========================================================================
+
+¿QUÉ ES ESTE PROGRAMA?
+-----------------------
+Es una aplicación de escritorio para gestionar una biblioteca.
+Permite registrar libros, autores, usuarios y préstamos.
+Tiene una interfaz gráfica (ventana con botones y tablas),
+se conecta a una base de datos MySQL para guardar los datos,
+y ahora también puede guardar y recuperar todo en ficheros XML.
+
+===========================================================================
+ESTRUCTURA GENERAL: ARQUITECTURA MVC
+===========================================================================
+
+El programa sigue la arquitectura MVC (Modelo - Vista - Controlador).
+Es como dividir el trabajo en tres roles muy distintos:
+
+   ┌─────────────────────────────────────────────────────────┐
+   │   MODELO       │ Los "datos" y la lógica de negocio     │
+   │   VISTA        │ La interfaz gráfica que ve el usuario  │
+   │   CONTROLADOR  │ El intermediario que une Modelo+Vista  │
+   └─────────────────────────────────────────────────────────┘
+
+El usuario hace clic → la Vista avisa al Controlador →
+el Controlador pide datos al Modelo → el Modelo va a MySQL
+→ devuelve el resultado → la Vista lo muestra en pantalla.
+
+===========================================================================
+LOS PAQUETES (carpetas) DEL PROYECTO
+===========================================================================
+
+biblioteca/
+│
+├── AppBiblioteca.java          ← Punto de entrada. Arranca todo.
+│
+├── controlador/
+│   └── Controlador.java        ← El intermediario entre vista y modelo.
+│                                 Tiene todos los métodos que la vista puede llamar.
+│
+├── modelo/
+│   ├── Modelo.java             ← La "fachada": coordina las 3 clases de negocio.
+│   │
+│   ├── dominio/                ← Los objetos del mundo real:
+│   │   ├── Autor.java          → Un autor de libro
+│   │   ├── Libro.java          → Un libro (ISBN, título, año, categoría, autores)
+│   │   ├── Audiolibro.java     → Un libro especial con duración y formato de audio
+│   │   ├── Categoria.java      → Enum: NOVELA, ENSAYO, etc.
+│   │   ├── Direccion.java      → Dirección postal de un usuario
+│   │   ├── Prestamo.java       → Un préstamo (libro + usuario + fechas)
+│   │   └── Usuario.java        → Un usuario registrado (DNI único tipo "AB345")
+│   │
+│   └── negocio/                ← Las clases que hablan con MySQL:
+│       ├── Autores.java        → NUEVO: gestiona los autores (Singleton + XML)
+│       ├── Libros.java         → Gestiona libros y audiolibros en BD + XML
+│       ├── Usuarios.java       → Gestiona usuarios en BD + XML
+│       ├── Prestamos.java      → Gestiona préstamos en BD + XML
+│       └── mysql/
+│           └── Conexion.java   → Singleton que abre la conexión a MySQL
+│
+├── fichero/                    ← NUEVO paquete
+│   └── RutasXML.java           → Solo guarda los nombres de los 4 ficheros XML
+│
+├── utilidades/                 ← NUEVO paquete
+│   └── UtilidadesXML.java      → Herramientas para leer/escribir XML con DOM
+│
+└── vista/
+    └── gui/
+        ├── FxApplication.java      → Lanza la ventana JavaFX
+        ├── MainController.java     → Controla la ventana principal (menú Archivo)
+        ├── UsuariosController.java → Controla la pestaña de usuarios
+        ├── LibrosController.java   → Controla la pestaña de libros
+        ├── PrestamosController.java→ Controla la pestaña de préstamos
+        ├── LibroFormController.java→ Controla el formulario de nuevo libro
+        └── resources/gui/
+            ├── main.fxml           → Diseño XML de la ventana principal (con menú Archivo)
+            ├── usuarios-tab.fxml   → Diseño de la pestaña Usuarios
+            ├── libros-tab.fxml     → Diseño de la pestaña Libros
+            ├── prestamos-tab.fxml  → Diseño de la pestaña Préstamos
+            └── styles.css          → Estilos visuales de toda la aplicación
+
+===========================================================================
+¿CÓMO ARRANCA EL PROGRAMA?
+===========================================================================
+
+1. Se ejecuta AppBiblioteca.java → crea el Modelo y la Vista
+2. Crea el Controlador con ambos
+3. Llama a controlador.comenzar()
+4. El Modelo abre conexiones a MySQL (Libros, Usuarios, Prestamos, Autores)
+5. La Vista lanza la ventana JavaFX (FxApplication)
+6. El usuario ve la pantalla principal con el menú Archivo
+
+===========================================================================
+EL PATRÓN SINGLETON (muy importante en este proyecto)
+===========================================================================
+
+Un Singleton es una clase que solo puede tener UNA instancia en todo el programa.
+Es como decir: "solo hay un jefe de libros, uno de usuarios, etc."
+
+Ejemplo con Libros:
+   Libros.getInstancia() → devuelve siempre el mismo objeto Libros
+   Si no existe aún, lo crea. Si ya existe, devuelve el que hay.
+
+Clases Singleton en el proyecto:
+   → Libros.java
+   → Usuarios.java
+   → Prestamos.java
+   → Autores.java  (nueva)
+   → Conexion.java (la conexión MySQL compartida)
+
+===========================================================================
+¿QUÉ ES DOM Y POR QUÉ LO USAMOS?
+===========================================================================
+
+DOM (Document Object Model) es una forma de trabajar con XML en Java.
+Cuando leemos un fichero XML, DOM lo convierte en un árbol de nodos en memoria,
+como si fuera un árbol genealógico:
+
+   <usuarios>               ← Nodo raíz
+     <usuario>              ← Nodo hijo
+       <dni>AB345</dni>     ← Nodo texto
+       <nombre>Juan</nombre>
+     </usuario>
+   </usuarios>
+
+Nosotros podemos recorrer ese árbol, buscar nodos, leer su texto
+o crear nodos nuevos para construir un XML desde cero.
+
+UtilidadesXML.java tiene 3 métodos base:
+   xmlToDom(ruta)           → Lee fichero XML → nos da el árbol DOM
+   domToXml(dom, ruta)      → Guarda árbol DOM → crea fichero XML en disco
+   crearDomVacio(etiqueta)  → Crea árbol vacío listo para rellenar
+
+===========================================================================
+NUEVA FUNCIONALIDAD: COPIA DE SEGURIDAD
+===========================================================================
+
+¿Qué hace?
+  Exporta todos los datos actuales de la base de datos a 4 ficheros XML.
+
+¿Cómo funciona paso a paso?
+  1. El usuario hace clic en Archivo → Hacer copia de seguridad
+  2. Aparece un explorador de carpetas (DirectoryChooser) para elegir destino
+  3. Se muestra un Alert de confirmación
+  4. El MainController llama a Controlador.hacerCopiaSeguridad(carpeta)
+  5. El Controlador llama a Modelo.hacerCopiaSeguridad(carpeta)
+  6. El Modelo llama en orden:
+       Autores.escribirXML(carpeta)   → genera Autores.xml
+       Libros.escribirXML(carpeta)    → genera Libros.xml
+       Usuarios.escribirXML(carpeta)  → genera Usuarios.xml
+       Prestamos.escribirXML(carpeta) → genera Prestamos.xml
+  7. Se muestra un Alert de éxito (o error si algo falla)
+
+¿Qué hay dentro de cada XML?
+  Autores.xml   → <autores> con <autor> que tiene nombre, apellidos, nacionalidad
+  Libros.xml    → <libros> con <libro> que tiene isbn, titulo, anio, categoria, tipo,
+                  y opcionalmente duracion+formato (si es audiolibro), más <autores>
+  Usuarios.xml  → <usuarios> con <usuario> que tiene dni, nombre, email, y <direccion>
+  Prestamos.xml → <prestamos> con <prestamo> que tiene usuario(DNI), libro(ISBN),
+                  fechaInicio, fechaLimite, devuelto, fechaDevolucion
+
+===========================================================================
+NUEVA FUNCIONALIDAD: CARGAR COPIA DE SEGURIDAD
+===========================================================================
+
+¿Qué hace?
+  Lee los 4 ficheros XML y restaura todos los datos en la base de datos.
+  ATENCION: borra TODOS los datos actuales antes de insertar los del XML.
+
+¿Cómo funciona paso a paso?
+  1. El usuario hace clic en Archivo → Cargar copia de seguridad
+  2. Aparece un explorador de carpetas para elegir la carpeta origen
+  3. El programa verifica que existan los 4 ficheros XML
+  4. Se muestra un Alert de WARNING (aviso de que se borrarán los datos)
+  5. Si el usuario confirma:
+       a) Usuarios.borrarTodos()  → borra prestamos, direcciones, usuarios
+       b) Libros.borrarTodos()    → borra libro_autor, audiolibro, libro
+       c) Autores.borrarTodos()   → borra todos los autores
+       d) Autores.leerXML()       → importa autores desde XML
+       e) Libros.leerXML()        → importa libros desde XML
+       f) Usuarios.leerXML()      → importa usuarios desde XML
+       g) Prestamos.leerXML()     → importa préstamos desde XML
+  6. Se refrescan las 3 pestañas de la interfaz
+  7. Se muestra un Alert de éxito
+
+¿Por qué ese orden?
+  Porque los préstamos dependen de usuarios y libros,
+  y los libros dependen de autores (tabla libro_autor).
+  Si intentamos insertar un préstamo antes que el usuario o libro,
+  la base de datos da error de clave foránea (FK violation).
+
+===========================================================================
+LA INTERFAZ GRÁFICA (ventana)
+===========================================================================
+
+La ventana principal tiene:
+  ┌─────────────────────────────────────┐
+  │ [Menú: Archivo ▼]                   │  ← NUEVO: menú con las 2 opciones XML
+  │ ═══════════════════════════════════ │
+  │ 📚 BIBLIOTECA                       │  ← Cabecera azul
+  ├──────────┬──────────────────────────┤
+  │          │                          │
+  │ Sidebar  │   Zona de contenido      │
+  │          │                          │
+  │ 👥 Usuarios  │  Tabla con datos     │
+  │ 📚 Libros    │  + botones           │
+  │ 🔄 Préstamos │  Alta/Baja/Buscar    │
+  │          │                          │
+  │ 🚪 Salir │                          │
+  └──────────┴──────────────────────────┘
+
+Cada pestaña (Usuarios, Libros, Préstamos) tiene:
+  - Una tabla que muestra los datos de la BD
+  - Botones para dar de alta, buscar y dar de baja
+  - Formularios emergentes para introducir nuevos datos
+
+===========================================================================
+RESUMEN DE CLASES NUEVAS Y MODIFICADAS EN ESTA TAREA
+===========================================================================
+
+NUEVAS:
+  biblioteca.fichero.RutasXML         → Constantes con nombres de ficheros XML
+  biblioteca.utilidades.UtilidadesXML → xmlToDom, domToXml, crearDomVacio
+  biblioteca.modelo.negocio.Autores   → Singleton completo para gestionar autores
+
+MODIFICADAS (se les añadieron métodos XML manteniendo todo lo anterior):
+  Libros.java   → + libroToElement, elementToLibro, escribirXML, leerXML, borrarTodos
+  Usuarios.java → + usuarioToElement, elementToUsuario, escribirXML, leerXML, borrarTodos
+  Prestamos.java→ + prestamoToElement, elementToPrestamo, escribirXML, leerXML
+  Modelo.java   → + hacerCopiaSeguridad(), cargarCopiaSeguridad()
+  Controlador.java → + hacerCopiaSeguridad(), cargarCopiaSeguridad()
+  main.fxml     → + MenuBar con menú Archivo
+  MainController.java → + hacerCopiaSeguridad(), cargarCopiaSeguridad() con Alerts
+  styles.css    → + estilos visuales para el MenuBar
+
+===========================================================================
+FIN DE LA EXPLICACIÓN
+===========================================================================

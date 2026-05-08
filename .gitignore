@@ -1,0 +1,22 @@
+# Build and binary folders
+.gradle
+build/
+bin/
+out/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Project specific
+!gradle/wrapper/gradle-wrapper.jar

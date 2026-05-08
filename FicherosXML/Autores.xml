@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<autores>
+    <autor>
+        <nombre>a</nombre>
+        <apellidos>a</apellidos>
+        <nacionalidad>a</nacionalidad>
+    </autor>
+    <autor>
+        <nombre>Adrian</nombre>
+        <apellidos>Merluza</apellidos>
+        <nacionalidad>Peruano</nacionalidad>
+    </autor>
+    <autor>
+        <nombre>Alcachofa</nombre>
+        <apellidos>Lopez</apellidos>
+        <nacionalidad>Diezmo</nacionalidad>
+    </autor>
+    <autor>
+        <nombre>Andrzej</nombre>
+        <apellidos>Sapkowski</apellidos>
+        <nacionalidad>Polaca</nacionalidad>
+    </autor>
+    <autor>
+        <nombre>Carlos Ruiz Zafon</nombre>
+        <apellidos>Ruiz Zafon</apellidos>
+        <nacionalidad>España</nacionalidad>
+    </autor>
+    <autor>
+        <nombre>Juanito</nombre>
+        <apellidos>El Atunes</apellidos>
+        <nacionalidad>Venezolano</nacionalidad>
+    </autor>
+    <autor>
+        <nombre>Paco</nombre>
+        <apellidos>El Chanclas</apellidos>
+        <nacionalidad>Peruano</nacionalidad>
+    </autor>
+    <autor>
+        <nombre>Paquito</nombre>
+        <apellidos>Salas</apellidos>
+        <nacionalidad>Española</nacionalidad>
+    </autor>
+</autores>

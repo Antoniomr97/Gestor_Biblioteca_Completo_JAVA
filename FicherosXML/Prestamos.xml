@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<prestamos>
+    <prestamo>
+        <usuario>MB123</usuario>
+        <libro>4564564564561</libro>
+        <fechaInicio>2026-04-18</fechaInicio>
+        <fechaLimite>2026-05-03</fechaLimite>
+        <devuelto>true</devuelto>
+        <fechaDevolucion>2026-04-18</fechaDevolucion>
+    </prestamo>
+</prestamos>

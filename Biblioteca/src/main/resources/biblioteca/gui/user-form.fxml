@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefWidth="460.0" spacing="20.0" stylesheets="@styles.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.vista.gui.UserFormController">
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </padding>
+    <children>
+        <Label text="Añadir Nuevo Usuario" textFill="#2c3e50">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <GridPane hgap="15.0" vgap="12.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="35.0" />
+                <RowConstraints minHeight="35.0" />
+                <RowConstraints minHeight="35.0" />
+                <RowConstraints minHeight="35.0" />
+                <RowConstraints minHeight="35.0" />
+                <RowConstraints minHeight="35.0" />
+                <RowConstraints minHeight="35.0" />
+            </rowConstraints>
+            <children>
+                <!-- Fila 0: ID -->
+                <Label text="ID (Ej: AB123):" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="txtId" promptText="AB123"
+                           GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <!-- Fila 1: Nombre -->
+                <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <TextField fx:id="txtNombre" promptText="Nombre completo"
+                           GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <!-- Fila 2: Email -->
+                <Label text="Email:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <TextField fx:id="txtEmail" promptText="ejemplo@correo.com"
+                           GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                <!-- Fila 3: Vía -->
+                <Label text="Vía / Calle:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <TextField fx:id="txtVia" promptText="Calle, Avda, etc."
+                           GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+                <!-- Fila 4: Número -->
+                <Label text="Número:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                <TextField fx:id="txtNumero" promptText="Piso, puerta..."
+                           GridPane.rowIndex="4" GridPane.columnIndex="1" />
+
+                <!-- Fila 5: Código Postal -->
+                <Label text="C. Postal (5 díg.):" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+                <TextField fx:id="txtCp" promptText="00000"
+                           GridPane.rowIndex="5" GridPane.columnIndex="1" />
+
+                <!-- Fila 6: Localidad -->
+                <Label text="Localidad:" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+                <TextField fx:id="txtLocalidad" promptText="Ciudad"
+                           GridPane.rowIndex="6" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <children>
+                <Button fx:id="btnCancelar" mnemonicParsing="false" text="Cancelar" onAction="#handleCancelar" />
+                <Button fx:id="btnGuardar" mnemonicParsing="false" styleClass="button-primary" text="Guardar" onAction="#handleGuardar" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

@@ -1,0 +1,160 @@
+/* 
+   Hoja de estilos corregida para evitar advertencias del editor y fallos de ejecución.
+*/
+
+.root {
+    /* Variables personalizadas (sin el prefijo -fx- para evitar avisos de compatibilidad web) */
+    -color-primary: #A7C7E7;    /* Azul Pastel Principal */
+    -color-secondary: #E3E9F0;  /* Azul Grisáceo para fondos */
+    -color-accent: #5D9CEC;     /* Azul de acento */
+    -color-text: #2C3E50;       /* Gris oscuro para texto */
+    
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* Panel principal */
+.main-container {
+    -fx-background-color: -color-secondary;
+}
+
+/* Menú lateral */
+.sidebar {
+    -fx-background-color: white;
+    -fx-padding: 20 0 20 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 5, 0);
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 15 20 15 20;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+    /* Didáctico: Separamos el color del ancho para evitar errores de ClassCastException */
+    -fx-border-color: transparent transparent transparent -color-primary;
+    -fx-border-width: 0 0 0 4px;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: derive(-color-primary, 80%);
+}
+
+.sidebar-button:selected {
+    -fx-background-color: derive(-color-primary, 90%);
+    -fx-border-color: transparent transparent transparent -color-primary;
+    -fx-border-width: 0 0 0 4px;
+}
+
+/* Cabecera */
+.header {
+    -fx-background-color: -color-primary;
+    -fx-padding: 15 25 15 25;
+}
+
+.header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+}
+
+/* Tablas */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-selection-bar: -color-primary;
+}
+
+.table-view .column-header {
+    -fx-background-color: white;
+    -fx-border-color: -color-secondary;
+    -fx-padding: 10;
+}
+
+.table-view .cell {
+    -fx-padding: 10;
+    -fx-border-color: transparent -color-secondary transparent transparent;
+}
+
+/* Botones */
+.button-primary {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8 20 8 20;
+}
+
+.button-primary:hover {
+    -fx-background-color: derive(-color-primary, -10%);
+}
+
+.button-danger {
+    -fx-background-color: #FFB3B3;
+    -fx-text-fill: #800000;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8 20 8 20;
+}
+
+.button-danger:hover {
+    -fx-background-color: #FF9999;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+}
+
+/* ==============================
+   MENÚ BAR - Archivo
+   ============================== */
+.menu-bar {
+    -fx-background-color: #2C3E50;
+    -fx-padding: 0 5 0 5;
+}
+
+.menu-bar .menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.menu-bar .menu .label {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.menu-bar .menu:hover,
+.menu-bar .menu:showing {
+    -fx-background-color: derive(#2C3E50, 30%);
+}
+
+.context-menu {
+    -fx-background-color: #34495E;
+    -fx-background-radius: 4px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0, 2, 2);
+}
+
+.menu-item {
+    -fx-padding: 8 15 8 15;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+}
+
+.menu-item:hover,
+.menu-item:focused {
+    -fx-background-color: -color-accent;
+}
+
+.menu-item:hover .label,
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}
